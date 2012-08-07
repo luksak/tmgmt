@@ -50,7 +50,7 @@ class TMGMTI18nStringSourceTestCase extends TMGMTBaseTestCase {
     $job->requestTranslation();
 
     foreach ($job->getItems() as $item) {
-      /* @var $item TMGMTJobItem */
+      /* @var $item JobItem */
       $item->acceptTranslation();
     }
 
@@ -129,7 +129,7 @@ class TMGMTI18nStringSourceTestCase extends TMGMTBaseTestCase {
     $this->assertEqual(t('Menu'), $item1->getSourceType());
     $job->requestTranslation();
     foreach ($job->getItems() as $item) {
-      /* @var $item TMGMTJobItem */
+      /* @var $item JobItem */
       $item->acceptTranslation();
     }
 

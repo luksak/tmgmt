@@ -11,7 +11,7 @@ interface TMGMTSourceUIControllerInterface extends TMGMTPluginBaseInterface {
   /**
    * Form callback for the job item review form.
    */
-  public function reviewForm($form, &$form_state, TMGMTJobItem $item);
+  public function reviewForm($form, &$form_state, JobItem $item);
 
   /**
    * Form callback for the data item element form.
@@ -21,12 +21,12 @@ interface TMGMTSourceUIControllerInterface extends TMGMTPluginBaseInterface {
   /**
    * Validation callback for the job item review form.
    */
-  public function reviewFormValidate($form, &$form_state, TMGMTJobItem $item);
+  public function reviewFormValidate($form, &$form_state, JobItem $item);
 
   /**
    * Submit callback for the job item review form.
    */
-  public function reviewFormSubmit($form, &$form_state, TMGMTJobItem $item);
+  public function reviewFormSubmit($form, &$form_state, JobItem $item);
 
   /**
    * Implements hook_menu().

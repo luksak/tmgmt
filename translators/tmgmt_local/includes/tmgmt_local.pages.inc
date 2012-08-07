@@ -8,7 +8,7 @@
 /**
  * Simple page callback for viewing a task.
  *
- * @param TMGMTJob $task
+ * @param \Drupal\tmgmt\Plugin\Core\Entity\Job $task
  *   The viewed task.
  *
  * @return array
@@ -232,7 +232,7 @@ function tmgmt_local_translation_form_save_as_completed_submit($form, &$form_sta
   }
 
   /**
-   * @var TMGMTJobItem $job_item.
+   * @var JobItem $job_item.
    */
   $job_item = $form_state['job_item'];
 

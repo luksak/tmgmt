@@ -124,7 +124,7 @@ class TMGMTLocalTask extends Entity {
   /**
    * Return the corresponding translation job.
    *
-   * @return TMGMTJob
+   * @return Job
    */
   public function getJob() {
     return tmgmt_job_load($this->tjid);
@@ -181,10 +181,10 @@ class TMGMTLocalTask extends Entity {
   /**
    * Create a task item for this task and the given job item.
    *
-   * @param TMGMTJobItem $job_item
+   * @param \Drupal\tmgmt\Plugin\Core\Entity\JobItem $job_item
    *   The job item.
    */
-  public function addTaskItem(TMGMTJobItem $job_item) {
+  public function addTaskItem(JobItem $job_item) {
     // Save the task to get an id.
     if (empty($this->tltid)) {
       $this->save();
@@ -221,7 +221,7 @@ class TMGMTLocalTask extends Entity {
    * @return int
    *   The updated status of the task if it could be set.
    *
-   * @see TMGMTJob::addMessage()
+   * @see Job::addMessage()
    */
   public function setStatus($status) {
     // Return TRUE if the status could be set. Return FALSE otherwise.

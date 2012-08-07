@@ -6,8 +6,3 @@ core = 7.x
 dependencies[] = tmgmt_entity
 dependencies[] = tmgmt_ui
 dependencies[] = views_bulk_operations
-
-files[] = tmgmt_entity_ui.test
-files[] = tmgmt_entity_ui.list.test
-files[] = tmgmt_entity_ui.ui.inc
-
