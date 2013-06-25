@@ -147,21 +147,15 @@ function tmgmt_permission() {
  * Implements hook_modules_installed().
  */
 function tmgmt_modules_installed($modules) {
-  drupal_static_reset('_tmgmt_plugin_info');
+  Drupal::service('plugin.manager.tmgmt.translator')->clearCachedDefinitions();
   foreach (tmgmt_translator_plugin_info() as $key => $info) {
     // Check if this translator plugin has been added by one of the recently
     // installed modules and doesn't prevent auto creation.
-    if ((!isset($info['auto create']) || $info['auto create'] == TRUE) && in_array($info['module'], $modules)) {
+    // @todo: module key is missing in translator info.
+    //if ((!isset($info['auto create']) || $info['auto create'] == TRUE) && in_array($info['module'], $modules)) {
       tmgmt_translator_auto_create($key);
-    }
+    //}
   }
-}
-
-/**
- * Implements hook_flush_caches().
- */
-function tmgmt_flush_caches() {
-  return array('cache_tmgmt');
 }
 
 /**
@@ -793,7 +787,7 @@ function tmgmt_translator_auto_create($plugin) {
  *   An array of translator plugin definitions.
  */
 function tmgmt_translator_plugin_info($plugin = NULL) {
-  return Drupal::service('plugin.manager.tmgmt.translator')->getDefinitions($plugin);
+  return Drupal::service('plugin.manager.tmgmt.translator')->getDefinition($plugin);
 }
 
 /**
@@ -894,11 +888,11 @@ function tmgmt_translator_labels_flagged($job = NULL) {
 function tmgmt_provide_remote_languages_mappings(Translator $translator) {
   $info = tmgmt_translator_plugin_info($translator->plugin);
 
-  if (!isset($info['map remote languages'])) {
+  if (!isset($info['map_remote_languages'])) {
     return TRUE;
   }
 
-  return $info['map remote languages'];
+  return $info['map_remote_languages'];
 }
 
 /**

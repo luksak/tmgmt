@@ -162,8 +162,8 @@ class PluginsTest extends TMGMTUnitTestBase {
     $this->assertEqual($controller->mapToRemoteLanguage($this->default_translator, 'de'), 'de-de');
 
     // Test the fallback.
-    $info = &drupal_static('_tmgmt_plugin_info');
-    $info['translator']['test_translator']['map remote languages'] = FALSE;
+    $this->container->get('state')->set('tmgmt_test_translator_map_languages', FALSE);
+    $this->container->get('plugin.manager.tmgmt.translator')->clearCachedDefinitions();
 
     $this->assertEqual($controller->mapToRemoteLanguage($this->default_translator, 'en'), 'en');
     $this->assertEqual($controller->mapToRemoteLanguage($this->default_translator, 'de'), 'de');

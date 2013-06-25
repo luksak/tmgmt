@@ -1,6 +1,6 @@
-name: Translation Management Core
-description: Core functionality for the Translation Management Suite.
-package: Translation Management
+name: 'Translation Management Core'
+description: 'Core functionality for the Translation Management Suite.'
+package: 'Translation Management'
 core: 8.x
 type: module
 

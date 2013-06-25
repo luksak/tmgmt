@@ -21,6 +21,14 @@ function tmgmt_test_tmgmt_source_plugin_info() {
 }
 
 /**
+ * Implements hook_tmgmt_translator_info_alter().
+ */
+function tmgmt_test_tmgmt_translator_info_alter(&$definitions) {
+  $map = Drupal::state()->get('tmgmt_test_translator_map_languages');
+  $definitions['test_translator']['map_remote_languages'] = $map !== NULL ? $map : TRUE;
+}
+
+/**
  * Implements hook_tmgmt_source_suggestions().
  */
 function tmgmt_test_tmgmt_source_suggestions(array $items, Job $job) {

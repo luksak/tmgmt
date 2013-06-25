@@ -166,7 +166,7 @@ class Translator extends ConfigEntityBase {
         // for our source language yet.
         if (!isset($this->languageCache[$source_language])) {
           $this->languageCache[$source_language] = $controller->getSupportedTargetLanguages($this, $source_language);
-          $this->languageCacheOutdated = TRUE;
+          $this->updateCache();
         }
       }
       return $this->languageCache[$source_language];
@@ -199,7 +199,7 @@ class Translator extends ConfigEntityBase {
         // available.
         if (empty($this->languagePairsCache)) {
           $this->languagePairsCache = $controller->getSupportedLanguagePairs($this);
-          $this->languageCacheOutdated = TRUE;
+          $this->updateCache();
         }
       }
       return $this->languagePairsCache;
@@ -339,12 +339,12 @@ class Translator extends ConfigEntityBase {
   }
 
   /**
-   * Updates the language cache if it has changed.
+   * Updates the language cache.
    */
-  public function __destruct() {
+  protected function updateCache() {
     if ($controller = $this->getController()) {
       $info = $controller->getPluginDefinition();
-      if (!isset($info['language cache']) || !empty($info['language cache']) && !empty($this->languageCacheOutdated)) {
+      if (!isset($info['language cache']) || !empty($info['language cache'])) {
         cache('tmgmt')->set('languages:' . $this->name, $this->languageCache);
         cache('tmgmt')->set('language_pairs:' . $this->name, $this->languagePairsCache);
       }

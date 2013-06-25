@@ -24,14 +24,14 @@ class EntitySourceTest extends EntityTestBase {
    */
   public static $modules = array('tmgmt_entity', 'taxonomy', 'translation_entity');
 
+  /**
   static function getInfo() {
-    return array();
     return array(
       'name' => 'Entity Source tests',
       'description' => 'Exporting source data from entities and saving translations back to entities.',
       'group' => 'Translation Management',
     );
-  }
+  }*/
 
   function setUp() {
 
