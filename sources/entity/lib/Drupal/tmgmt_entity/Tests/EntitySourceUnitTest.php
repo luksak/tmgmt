@@ -37,7 +37,7 @@ class EntitySourceUnitTest extends EntityUnitTestBase {
     parent::setUp();
 
 
-    $this->installSchema('node', array('node', 'node_field_revision', 'node_field_data', 'node_type'));
+    $this->installSchema('node', array('node', 'node_field_revision', 'node_field_data'));
     $this->installSchema('tmgmt', array('tmgmt_job', 'tmgmt_job_item'));
     $this->installSchema('entity_test', array('entity_test_rev', 'entity_test_mul', 'entity_test_mulrev'));
     entity_test_install();
@@ -82,7 +82,7 @@ class EntitySourceUnitTest extends EntityUnitTestBase {
     $translation->field_test_text->format = 'text_plain';
     $translation->field_test_text[1]->value = $this->randomName();
     $translation->field_test_text[1]->format = 'text_plain';
-    $translation->image_test->fid = $this->image->id();
+    $translation->image_test->target_id = $this->image->id();
     $translation->image_test->alt = $alt = $this->randomName();
     $translation->image_test->title = $title = $this->randomName();
     $entity_test->save();
@@ -128,7 +128,7 @@ class EntitySourceUnitTest extends EntityUnitTestBase {
     $image_item = $data['image_test'][0];
     $this->assertEqual( $data['image_test']['#label'], 'Field image_test');
     $this->assertEqual($image_item['#label'], 'Delta #0');
-    $this->assertFalse($image_item['fid']['#translate']);
+    $this->assertFalse($image_item['target_id']['#translate']);
     $this->assertFalse($image_item['width']['#translate']);
     $this->assertFalse($image_item['height']['#translate']);
     $this->assertTrue($image_item['alt']['#translate']);
@@ -147,13 +147,13 @@ class EntitySourceUnitTest extends EntityUnitTestBase {
     $account = $this->createUser();
     $type = $this->drupalCreateContentType();
     $field = field_info_field('body');
-    $field['translatable'] = TRUE;
-    $field['cardinality'] = 2;
-    field_update_field($field);
+    $field->translatable = TRUE;
+    $field->cardinality = 2;
+    $field->save();
 
     $translation = entity_create('node', array(
       'uid' => $account->id(),
-      'type' => $type->type,
+      'type' => $type->id(),
       'title' => 'Test node',
       'status' => 1,
       'comment' => 2,
@@ -227,41 +227,21 @@ class EntitySourceUnitTest extends EntityUnitTestBase {
    *   Created content type.
    */
   protected function drupalCreateContentType($settings = array()) {
-    // Find a non-existent random type name.
-    do {
-      $name = strtolower($this->randomName(8));
-    } while (node_type_load($name));
-
-    // Populate defaults array.
-    $defaults = array(
+    $name = strtolower($this->randomName(8));
+    $values = array(
       'type' => $name,
       'name' => $name,
       'base' => 'node_content',
-      'description' => '',
-      'help' => '',
       'title_label' => 'Title',
       'body_label' => 'Body',
       'has_title' => 1,
       'has_body' => 1,
     );
-    // Imposed values for a custom type.
-    $forced = array(
-      'orig_type' => '',
-      'old_type' => '',
-      'module' => 'node',
-      'custom' => 1,
-      'modified' => 1,
-      'locked' => 0,
-    );
-    $type = $forced + $settings + $defaults;
-    $type = (object) $type;
 
-    $saved_type = node_type_save($type);
-    node_types_rebuild();
-    menu_router_rebuild();
-    node_add_body_field($type);
+    $type = entity_create('node_type', $values);
+    $saved = $type->save();
 
-    $this->assertEqual($saved_type, SAVED_NEW, t('Created content type %type.', array('%type' => $type->type)));
+    $this->assertEqual($saved, SAVED_NEW, t('Created content type %type.', array('%type' => $type->id())));
 
     return $type;
   }
