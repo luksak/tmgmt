@@ -7,6 +7,9 @@
 
 namespace Drupal\tmgmt_entity;
 
+use Drupal\Core\TypedData\AllowedValuesInterface;
+use Drupal\Core\TypedData\Type\StringInterface;
+use Drupal\Core\TypedData\PrimitiveInterface;
 use Drupal\tmgmt\DefaultSourcePluginController;
 use Drupal\tmgmt\Plugin\Core\Entity\JobItem;
 use Drupal\tmgmt\TMGMTException;
@@ -51,21 +54,25 @@ class EntitySourcePluginController extends DefaultSourcePluginController {
       $data[$key]['#label'] = $property_definition['label'];
       foreach ($property as $index => $property_item) {
         $data[$key][$index]['#label'] = t('Delta #@delta', array('@delta' => $index));
-        $item_definitions = $property_item->getPropertyDefinitions();
-        foreach ($item_definitions as $item_key => $item_definition) {
+        foreach ($property_item->getProperties() as $property_key => $property) {
           // Ignore computed values.
-          if (!empty($item_definition['computed'])) {
+          $property_definition = $property->getDefinition();
+          if (!empty($property_definition['computed'])) {
+            continue;
+          }
+          // Ignore values that are not primitves.
+          if (!($property instanceof PrimitiveInterface)) {
             continue;
           }
 
           $translate = TRUE;
-          // @todo: Ignore properties with limited allowed values.
-          if ($item_key == 'format' || !in_array($item_definition['type'], array('string'))) {
+          // Ignore properties with limited allowed values or if they're not strings.
+          if ($property instanceof AllowedValuesInterface || !($property instanceof StringInterface)) {
             $translate = FALSE;
           }
-          $data[$key][$index][$item_key] = array(
-            '#label' =>$item_definition['label'],
-            '#text' => $property[$index]->$item_key,
+          $data[$key][$index][$property_key] = array(
+            '#label' =>$property_definition['label'],
+            '#text' => $property->getValue(),
             '#translate' => $translate,
           );
         }
