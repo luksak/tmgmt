@@ -151,10 +151,9 @@ function tmgmt_modules_installed($modules) {
   foreach (tmgmt_translator_plugin_info() as $key => $info) {
     // Check if this translator plugin has been added by one of the recently
     // installed modules and doesn't prevent auto creation.
-    // @todo: module key is missing in translator info.
-    //if ((!isset($info['auto create']) || $info['auto create'] == TRUE) && in_array($info['module'], $modules)) {
+    if ((!isset($info['auto create']) || $info['auto create'] == TRUE) && in_array($info['provider'], $modules)) {
       tmgmt_translator_auto_create($key);
-    //}
+    }
   }
 }
 
@@ -787,7 +786,12 @@ function tmgmt_translator_auto_create($plugin) {
  *   An array of translator plugin definitions.
  */
 function tmgmt_translator_plugin_info($plugin = NULL) {
-  return Drupal::service('plugin.manager.tmgmt.translator')->getDefinition($plugin);
+  if ($plugin) {
+    return Drupal::service('plugin.manager.tmgmt.translator')->getDefinition($plugin);
+  }
+  else {
+    return Drupal::service('plugin.manager.tmgmt.translator')->getDefinitions();
+  }
 }
 
 /**
