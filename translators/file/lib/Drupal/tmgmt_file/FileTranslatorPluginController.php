@@ -7,14 +7,14 @@
 
 namespace Drupal\tmgmt_file;
 
-use Drupal\tmgmt\DefaultTranslatorPluginController;
+use Drupal\tmgmt\TranslatorPluginBase;
 use Drupal\tmgmt\Plugin\Core\Entity\Job;
 use Drupal\tmgmt\Plugin\Core\Entity\Translator;
 
 /**
  * File translator plugin controller.
  */
-class FileTranslatorPluginController extends DefaultTranslatorPluginController {
+class FileTranslatorPluginController extends TranslatorPluginBase {
 
   /**
    * Implements TranslatorPluginControllerInterface::canTranslate().

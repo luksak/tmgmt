@@ -800,7 +800,7 @@ function tmgmt_translator_plugin_info($plugin = NULL) {
  * @param $plugin
  *   (Optional) The machine-readable name of a service plugin.
  *
- * @return \Drupal\tmgmt\TranslatorPluginControllerInterface
+ * @return \Drupal\tmgmt\TranslatorPluginInterface
  *   - If the translator exists the controller object for the given source plugin
  *     or an array containing all available translator plugin controller objects
  *     if no plugin name was given.

@@ -2,12 +2,12 @@
 
 /**
  * @file
- * Contains Drupal\tmgmt_test\Plugin\tmgmt\Translator\TestSourcePluginController.
+ * Contains Drupal\tmgmt_test\Plugin\tmgmt\Translator\TestSource.
  */
 
 namespace Drupal\tmgmt_test\Plugin\tmgmt\Translator;
 
-use Drupal\tmgmt\DefaultTranslatorPluginController;
+use Drupal\tmgmt\TranslatorPluginBase;
 use Drupal\tmgmt\Plugin\Core\Entity\Job;
 use Drupal\tmgmt\Plugin\Core\Entity\JobItem;
 use Drupal\tmgmt\Plugin\Core\Entity\Translator;
@@ -27,7 +27,7 @@ use Drupal\Core\Annotation\Translation;
  *   }
  * )
  */
-class TestTranslatorPluginController extends DefaultTranslatorPluginController implements TranslatorRejectDataInterface {
+class TestTranslator extends TranslatorPluginBase implements TranslatorRejectDataInterface {
 
  /**
    * Overrides TMGMTDefaultTranslatorPluginController::getDefaultRemoteLanguagesMappings().

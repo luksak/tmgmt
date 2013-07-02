@@ -136,7 +136,7 @@ class Translator extends ConfigEntityBase {
   /**
    * Returns the translator plugin controller of this translator.
    *
-   * @return \Drupal\tmgmt\TranslatorPluginControllerInterface
+   * @return \Drupal\tmgmt\TranslatorPluginInterface
    */
   public function getController() {
     if (!empty($this->plugin)) {

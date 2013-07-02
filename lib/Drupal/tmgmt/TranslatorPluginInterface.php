@@ -17,7 +17,7 @@ use Drupal\tmgmt\Plugin\Core\Entity\Translator;
  *
  * @ingroup tmgmt_translator
  */
-interface TranslatorPluginControllerInterface extends PluginInspectionInterface {
+interface TranslatorPluginInterface extends PluginInspectionInterface {
 
   /**
    * Checks whether a translator is available.

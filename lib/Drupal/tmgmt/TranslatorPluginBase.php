@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\tmgmt\DefaultTranslatorPluginController.
+ * Contains Drupal\tmgmt\TranslatorPluginBase.
  */
 
 namespace Drupal\tmgmt;
@@ -17,7 +17,7 @@ use Drupal\tmgmt\Plugin\Core\Entity\Translator;
  *
  * @ingroup tmgmt_translator
  */
-abstract class DefaultTranslatorPluginController extends ComponentPluginBase implements TranslatorPluginControllerInterface {
+abstract class TranslatorPluginBase extends ComponentPluginBase implements TranslatorPluginInterface {
 
   protected $supportedRemoteLanguages = array();
   protected $remoteLanguagesMappings = array();
