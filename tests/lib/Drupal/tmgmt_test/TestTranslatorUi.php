@@ -7,7 +7,7 @@
 
 namespace Drupal\tmgmt_test;
 
-use Drupal\tmgmt\DefaultTranslatorUIController;
+use Drupal\tmgmt\TranslatorPluginUiBase;
 use Drupal\tmgmt\Plugin\Core\Entity\Job;
 use Drupal\tmgmt\Plugin\Core\Entity\JobItem;
 use Drupal\tmgmt\Plugin\Core\Entity\Translator;
@@ -15,7 +15,7 @@ use Drupal\tmgmt\Plugin\Core\Entity\Translator;
 /**
  * Test translator UI controller.
  */
-class TestTranslatorUIController extends DefaultTranslatorUIController {
+class TestTranslatorUi extends TranslatorPluginUiBase {
 
   /**
    * Overrides TMGMTDefaultTranslatorUIController::pluginSettingsForm().

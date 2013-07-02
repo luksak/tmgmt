@@ -7,6 +7,7 @@
 
 namespace Drupal\tmgmt;
 
+use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\tmgmt\Plugin\Core\Entity\Job;
 use Drupal\tmgmt\Plugin\Core\Entity\JobItem;
 use Drupal\tmgmt\Plugin\Core\Entity\Translator;
@@ -16,7 +17,7 @@ use Drupal\tmgmt\Plugin\Core\Entity\Translator;
  *
  * @ingroup tmgmt_translator
  */
-interface TranslatorUIControllerInterface extends PluginBaseInterface {
+interface TranslatorPluginUiInterface extends PluginInspectionInterface {
 
   /**
    * Form callback for the plugin settings form.
@@ -47,7 +48,7 @@ interface TranslatorUIControllerInterface extends PluginBaseInterface {
   /**
    * Form callback for the data item element form.
    */
-  public function reviewDataItemElement($form, &$form_state, $data_item_key, array $data_item, JobItem $item);
+  public function reviewDataItemElement($form, &$form_state, $data_item_key, $parent_key, array $data_item, JobItem $item);
 
   /**
    * Validation callback for the job item review form.

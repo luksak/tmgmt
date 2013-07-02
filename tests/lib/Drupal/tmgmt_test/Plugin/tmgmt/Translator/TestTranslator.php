@@ -24,7 +24,8 @@ use Drupal\Core\Annotation\Translation;
  *   description = @Translation("Simple translator for testing purposes."),
  *   default_settings = {
  *     "expose_settings" = TRUE,
- *   }
+ *   },
+ *   ui = "Drupal\tmgmt_test\TestTranslatorUi"
  * )
  */
 class TestTranslator extends TranslatorPluginBase implements TranslatorRejectDataInterface {

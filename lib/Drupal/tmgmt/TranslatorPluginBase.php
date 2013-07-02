@@ -165,7 +165,7 @@ abstract class TranslatorPluginBase extends ComponentPluginBase implements Trans
    * Implements TranslatorPluginControllerInterface::getNotAvailableReason().
    */
   public function getNotAvailableReason(Translator $translator) {
-    return t('@translator is not available. Make sure it is properly !configured.', array('@translator' => $this->pluginInfo['label'], '!configured' => l(t('configured'), 'admin/config/regional/tmgmt/translators/manage/' . $translator->name)));
+    return t('@translator is not available. Make sure it is properly !configured.', array('@translator' => $this->pluginDefinition['label'], '!configured' => l(t('configured'), 'admin/config/regional/tmgmt/translators/manage/' . $translator->name)));
   }
 
   /**
@@ -174,8 +174,8 @@ abstract class TranslatorPluginBase extends ComponentPluginBase implements Trans
   public function defaultSettings() {
     $defaults = array('auto_accept' => FALSE);
     // Check if any default settings are defined in the plugin info.
-    if (isset($this->pluginInfo['default settings'])) {
-      return array_merge($defaults, $this->pluginInfo['default settings']);
+    if (isset($this->pluginDefinition['default_settings'])) {
+      return array_merge($defaults, $this->pluginDefinition['default_settings']);
     }
     return $defaults;
   }

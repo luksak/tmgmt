@@ -823,7 +823,7 @@ function tmgmt_translator_plugin_controller($plugin = NULL) {
  *   name was given.
  */
 function tmgmt_translator_ui_controller($plugin = NULL) {
-  return _tmgmt_plugin_controller('translator', $plugin, 'ui', 'TMGMTDefaultTranslatorUIController');
+  return Drupal::service('plugin.manager.tmgmt.translator')->createUiInstance($plugin);
 }
 
 /**

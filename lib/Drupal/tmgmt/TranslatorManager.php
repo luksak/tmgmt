@@ -18,6 +18,13 @@ use Drupal\Core\Plugin\DefaultPluginManager;
 class TranslatorManager extends DefaultPluginManager {
 
   /**
+   * Array of instantiated translator UI instances.
+   *
+   * @var array
+   */
+  protected $ui = array();
+
+  /**
    * Constructs a ConditionManager object.
    *
    * @param \Traversable $namespaces
@@ -35,6 +42,24 @@ class TranslatorManager extends DefaultPluginManager {
     parent::__construct('tmgmt/Translator', $namespaces, $annotation_namespaces, 'Drupal\tmgmt\Annotation\TranslatorPlugin');
     $this->alterInfo($module_handler, 'tmgmt_translator_info');
     $this->setCacheBackend($cache_backend, $language_manager, 'tmgmt_translator');
+  }
+
+  /**
+   * Returns a translator plugin UI instance.
+   *
+   * @param string $plugin
+   *   Name of the translator plugin.
+   *
+   * @return \Drupal\tmgmt\TranslatorPluginUiInterface
+   *   Instance a translator plugin UI instance.
+   */
+  public function createUIInstance($plugin) {
+    if (!isset($this->ui[$plugin])) {
+      $definition = $this->getDefinition($plugin);
+      $class = $definition['ui'];
+      $this->ui[$plugin] = new $class(array(), $plugin, $definition);
+    }
+    return $this->ui[$plugin];
   }
 
 }

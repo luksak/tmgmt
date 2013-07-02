@@ -7,6 +7,7 @@
 
 namespace Drupal\tmgmt;
 
+use Drupal\Component\Plugin\PluginBase as ComponentPluginBase;
 use Drupal\tmgmt\Plugin\Core\Entity\Job;
 use Drupal\tmgmt\Plugin\Core\Entity\JobItem;
 use Drupal\tmgmt\Plugin\Core\Entity\Translator;
@@ -16,7 +17,7 @@ use Drupal\tmgmt\Plugin\Core\Entity\Translator;
  *
  * @ingroup tmgmt_translator
  */
-class DefaultTranslatorUIController extends PluginBase implements TranslatorUIControllerInterface {
+class TranslatorPluginUiBase extends ComponentPluginBase implements TranslatorPluginUiInterface {
 
   /**
    * Implements TMGMTTranslatorUIControllerInterface::pluginSettingsForm().
