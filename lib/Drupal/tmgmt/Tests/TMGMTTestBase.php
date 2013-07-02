@@ -180,7 +180,7 @@ class TMGMTTestBase extends WebTestBase {
   function addLanguage($langcode) {
     // Add the language.
     $edit = array(
-      'langcode' => $langcode,
+      'id' => $langcode,
     );
     $language = new Language($edit);
     language_save($language);

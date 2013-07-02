@@ -40,7 +40,6 @@ class TMGMTUnitTestBase extends DrupalUnitTestBase {
     // @todo: Try to get rid of these.
     $this->installSchema('system', 'url_alias');
     $this->installSchema('system', 'variable');
-    $this->installSchema('language', array('language'));
     $this->installSchema('tmgmt', array('tmgmt_job', 'tmgmt_job_item', 'tmgmt_message'));
 
     $this->default_translator = entity_create('tmgmt_translator', array('name' => 'test_translator', 'plugin' => 'test_translator'));
@@ -92,7 +91,7 @@ class TMGMTUnitTestBase extends DrupalUnitTestBase {
   function addLanguage($langcode) {
     // Add the language.
     $edit = array(
-      'langcode' => $langcode,
+      'id' => $langcode,
     );
     $language = new Language($edit);
     language_save($language);
